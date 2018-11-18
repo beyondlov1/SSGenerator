@@ -4,7 +4,20 @@
  */
 public class PictureUrlGenerator implements Generator<String> {
 
-    public String generate() {
-        return "https://raw.githubusercontent.com/Alvin9999/PAC/master/ss/ssr3529.PNG";
+    //TODO: 自动查找有ss账号的图片url
+
+    private String url;
+
+    public PictureUrlGenerator(){
+
     }
+
+    public PictureUrlGenerator(String url) {
+        this.url = url;
+    }
+
+    public String generate() {
+        return url;
+    }
+
 }
