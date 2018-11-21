@@ -1,3 +1,5 @@
+package com.beyond.entity;
+
 /**
  * @author beyondlov1
  * @date 2018/11/18
@@ -42,7 +44,7 @@ public class SSConfigEntity {
 
     @Override
     public String toString() {
-        return "SSConfigEntity{" +
+        return "com.beyond.entity.SSConfigEntity{" +
                 "ip='" + ip + '\'' +
                 ", port='" + port + '\'' +
                 ", password='" + password + '\'' +

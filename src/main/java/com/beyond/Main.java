@@ -1,3 +1,13 @@
+package com.beyond;
+
+import com.beyond.covert.BaiduOcrRecognizer;
+import com.beyond.covert.Recognizer;
+import com.beyond.entity.ResponseEntity;
+import com.beyond.entity.SSConfigEntity;
+import com.beyond.source.Generator;
+import com.beyond.source.PictureUrlGenerator;
+import com.beyond.utils.SSUrlCreator;
+
 /**
  * @author beyondlov1
  * @date 2018/11/18

@@ -1,3 +1,8 @@
+package com.beyond;
+
+import com.beyond.entity.ResponseEntity;
+import com.beyond.entity.SSConfigEntity;
+
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

@@ -1,5 +1,8 @@
+package com.beyond.covert;
+
 import com.baidu.aip.ocr.AipOcr;
-import org.apache.commons.lang3.StringUtils;
+import com.beyond.entity.BaiduOcrResponseEntity;
+import com.beyond.entity.ResponseEntity;
 import org.json.JSONArray;
 import org.json.JSONObject;
 

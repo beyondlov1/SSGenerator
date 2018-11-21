@@ -1,7 +1,13 @@
-import org.json.JSONObject;
+import com.beyond.SSConfigSelector;
+import com.beyond.SSConfigSelectorImpl;
+import com.beyond.covert.BaiduOcrRecognizer;
+import com.beyond.covert.Recognizer;
+import com.beyond.entity.ResponseEntity;
+import com.beyond.entity.SSConfigEntity;
+import com.beyond.source.Generator;
+import com.beyond.source.PictureUrlGenerator;
+import com.beyond.utils.SSUrlCreator;
 import org.junit.Test;
-
-import java.util.List;
 
 /**
  * @author beyondlov1
