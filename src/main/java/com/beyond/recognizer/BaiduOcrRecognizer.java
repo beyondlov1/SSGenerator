@@ -1,4 +1,4 @@
-package com.beyond.covert;
+package com.beyond.recognizer;
 
 import com.baidu.aip.ocr.AipOcr;
 import com.beyond.entity.BaiduOcrResponseEntity;
@@ -21,7 +21,7 @@ public class BaiduOcrRecognizer implements Recognizer<ResponseEntity, String> {
         client = new AipOcr(APP_ID, API_KEY, SECRET_KEY);
     }
 
-    public ResponseEntity covert(String url) {
+    public ResponseEntity parse(String url) {
         BaiduOcrResponseEntity baiduOcrResponseEntity = new BaiduOcrResponseEntity();
         JSONObject jsonObject = client.basicGeneralUrl(url, null);
         System.out.println(jsonObject.toString());

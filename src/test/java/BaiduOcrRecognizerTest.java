@@ -1,7 +1,7 @@
 import com.beyond.SSConfigSelector;
 import com.beyond.SSConfigSelectorImpl;
-import com.beyond.covert.BaiduOcrRecognizer;
-import com.beyond.covert.Recognizer;
+import com.beyond.recognizer.BaiduOcrRecognizer;
+import com.beyond.recognizer.Recognizer;
 import com.beyond.entity.ResponseEntity;
 import com.beyond.entity.SSConfigEntity;
 import com.beyond.source.Generator;
@@ -18,7 +18,7 @@ public class BaiduOcrRecognizerTest {
     public void test(){
         Generator<String> generator = new PictureUrlGenerator();
         Recognizer<ResponseEntity,String> recognizer = new BaiduOcrRecognizer();
-        ResponseEntity result = recognizer.covert(generator.generate());
+        ResponseEntity result = recognizer.parse(generator.generate());
         System.out.println(result.getContent());
         SSConfigSelector ssConfigSelector = new SSConfigSelectorImpl(4,4,7);
         SSConfigEntity ssConfigEntity = ssConfigSelector.selectFrom(result);

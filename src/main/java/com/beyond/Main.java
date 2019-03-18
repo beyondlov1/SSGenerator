@@ -1,7 +1,7 @@
 package com.beyond;
 
-import com.beyond.covert.BaiduOcrRecognizer;
-import com.beyond.covert.Recognizer;
+import com.beyond.recognizer.BaiduOcrRecognizer;
+import com.beyond.recognizer.Recognizer;
 import com.beyond.entity.ResponseEntity;
 import com.beyond.entity.SSConfigEntity;
 import com.beyond.source.Generator;
@@ -21,15 +21,11 @@ import java.util.List;
 public class Main {
     @SuppressWarnings("unchecked")
     public static void main(String[] args) {
-        String index = "0";
-        if (args != null&&args.length>0){
-            index = args[0];
-        }
         Generator<String> generator = new PictureUrlGenerator();
-        Recognizer<ResponseEntity,String> recognizer = new BaiduOcrRecognizer();
-        ResponseEntity result = recognizer.covert(generator.generate());
-        System.out.println("content: "+result.getContent());
-        SSConfigSelector ssConfigSelector = new SSConfigSelectorImpl(Integer.valueOf(index),4,7);
+        Recognizer<ResponseEntity, String> recognizer = new BaiduOcrRecognizer();
+        ResponseEntity result = recognizer.parse(generator.generate());
+        System.out.println("content: " + result.getContent());
+        SSConfigSelector ssConfigSelector = new SSConfigSelectorImpl(4, 7);
         List<SSConfigEntity> list = ssConfigSelector.selectAll(result);
         StringBuilder stringBuilder = new StringBuilder();
         for (SSConfigEntity ssConfigEntity : list) {
@@ -40,24 +36,22 @@ public class Main {
             System.out.println(ssConfigEntity.getPassword());
             System.out.println(ssConfigEntity.getEncryption());
         }
-        writeToFile(stringBuilder.toString(),null);
+        writeToFile(stringBuilder.toString());
     }
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
-    private static void writeToFile(String str, String path) {
+    private static void writeToFile(String str) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-        if (path == null){
-            path = "./result-"+simpleDateFormat.format(System.currentTimeMillis())+".txt";
-        }
-        File file= new File(path);
-        if (!file.exists()){
+        String path = "./result-" + simpleDateFormat.format(System.currentTimeMillis()) + ".txt";
+        File file = new File(path);
+        if (!file.exists()) {
             try {
                 file.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        try (FileOutputStream fileOutputStream = new FileOutputStream(path)){
+        try (FileOutputStream fileOutputStream = new FileOutputStream(path)) {
             fileOutputStream.write(str.getBytes());
             fileOutputStream.flush();
         } catch (IOException e) {

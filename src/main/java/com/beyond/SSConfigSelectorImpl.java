@@ -22,6 +22,11 @@ public class SSConfigSelectorImpl implements SSConfigSelector<List<String>> {
     public SSConfigSelectorImpl(){
     }
 
+    public SSConfigSelectorImpl(int size,int perSize) {
+        this.index = 0;
+        this.size = size;
+        this.perSize = perSize;
+    }
     public SSConfigSelectorImpl(int index, int size,int perSize) {
         this.index = index;
         this.size = size;
