@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="SSGenerator" target="6" />
+      <module name="SSGenerator" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>
