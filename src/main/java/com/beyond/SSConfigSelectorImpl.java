@@ -54,21 +54,25 @@ public class SSConfigSelectorImpl implements SSConfigSelector<List<String>> {
         List<String> content = responseEntity.getContent();
 
         List<SSConfigEntity> list = new ArrayList<>();
-        size = content.size()/perSize;
-        for (int i = 0; i < size; i++) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (String s : content) {
+            stringBuilder.append(s);
+        }
+        System.out.println(stringBuilder.toString());
+        Pattern pattern1 = Pattern.compile("(\\d+\\.\\d+\\.\\d+\\.\\d+)端口:(\\d+)加密方式:(AES-?256-?CFB)协议: *(origin)昆*,*.*?(.*?)(plain)");
+        Matcher matcher1 = pattern1.matcher(stringBuilder);
+        if (matcher1.find()){
             SSConfigEntity ssConfigEntity = new SSConfigEntity();
-            ssConfigEntity.setIp(get(content.get(perSize * i), "(\\d+\\.\\d+\\.\\d+\\.\\d+)"));
-            ssConfigEntity.setPort(get(content.get(perSize * i + 1), "(\\d+)"));
-            ssConfigEntity.setPassword(get(content.get(perSize * i + 2).trim(), "密*码:? ?+(.+)"));
-            ssConfigEntity.setEncryption(get(content.get(perSize * i + 3), "加密方式:? ?+(.+)"));
-
-            if (ssConfigEntity.getIp()==null||
-                    ssConfigEntity.getPort()==null||
-                    ssConfigEntity.getPassword()==null||
-                    ssConfigEntity.getEncryption()==null)
-                throw new RuntimeException("生成出错:"+ssConfigEntity.toString());
-
+            ssConfigEntity.setIp(matcher1.group(1));
+            ssConfigEntity.setPort(matcher1.group(2));
+            ssConfigEntity.setEncryption(matcher1.group(3));
+            ssConfigEntity.setPassword(matcher1.group(5));
             list.add(ssConfigEntity);
+            System.out.println(matcher1.group(1));
+            System.out.println(matcher1.group(2));
+            System.out.println(matcher1.group(3));
+            System.out.println(matcher1.group(4));
+            System.out.println(matcher1.group(5));
         }
 
         return list;

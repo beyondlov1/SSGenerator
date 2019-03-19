@@ -34,4 +34,23 @@ public class BaiduOcrRecognizer implements Recognizer<ResponseEntity, String> {
         }
         return baiduOcrResponseEntity;
     }
+
+    public ResponseEntity parse() {
+        BaiduOcrResponseEntity baiduOcrResponseEntity = new BaiduOcrResponseEntity();
+        JSONObject jsonObject = client.basicGeneral("C:\\Users\\huayu\\Desktop\\ssr4036.jpg",null);
+        System.out.println(jsonObject.toString());
+        JSONArray words_result = jsonObject.getJSONArray("words_result");
+        for (int i = 0; i < words_result.length(); i++) {
+            JSONObject wordsObject = words_result.getJSONObject(i);
+            if (wordsObject!=null&&wordsObject.get("words")!=null){
+                baiduOcrResponseEntity.addWords(wordsObject.get("words").toString());
+            }
+        }
+        return baiduOcrResponseEntity;
+    }
+
+    public static void main(String[] args) {
+        BaiduOcrRecognizer baiduOcrRecognizer = new BaiduOcrRecognizer();
+        baiduOcrRecognizer.parse();
+    }
 }
