@@ -7,6 +7,7 @@ import com.beyond.entity.SSConfigEntity;
 import com.beyond.source.Generator;
 import com.beyond.source.PictureUrlGenerator;
 import com.beyond.utils.SSUrlCreator;
+import org.apache.commons.lang3.time.DateFormatUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -22,6 +23,9 @@ public class Main {
     @SuppressWarnings("unchecked")
     public static void main(String[] args) {
         Generator<String> generator = new PictureUrlGenerator();
+        if (generator instanceof PictureUrlGenerator){
+            ((PictureUrlGenerator) generator).generatePicture("./result_pic.png");
+        }
         Recognizer<ResponseEntity, String> recognizer = new BaiduOcrRecognizer();
         ResponseEntity result = recognizer.parse(generator.generate());
         System.out.println("content: " + result.getContent());
@@ -41,8 +45,7 @@ public class Main {
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
     private static void writeToFile(String str) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-        String path = "./result-" + simpleDateFormat.format(System.currentTimeMillis()) + ".txt";
+        String path = "./result.txt";
         File file = new File(path);
         if (!file.exists()) {
             try {
